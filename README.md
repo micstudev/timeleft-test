@@ -47,4 +47,6 @@ If this was being built for real world what would I do different?
 - I would add E2E tests maybe something like Cypress where can have tests to run on push, or maybe merge to main running through github actions just to test front-end UI make sure everything is as expected
 - Would approach with a more unified design system, probs more everything to shadCN and setup css tailwind variables etc....
 - Implemented redis or something simialr for the rate limiting so can store ip adresses etc...
-- Would add a layer of authentication too the api route - e.g. requests to it needing an API key or maybe only allowind requests from said application pages e.g. from within the site at /events or whatever
+- Would add a layer of authentication too the api route - e.g. requests to it needing an API key or maybe only allowing requests from said application pages e.g. from within the site at /events or whatever
+- Would implement nicer looking error and loading state for the user - that fits within design system
+- Would probably extend unit test coverage to every util function and more components

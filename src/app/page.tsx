@@ -8,6 +8,7 @@ import { MaxWidthWrapper } from "@/components/maxWidthWrapper/MaxWidthWrapper";
 import { calculateEventStats } from "@/utils/events/calculateEventStats";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
+import { LiveDataIndicator } from "@/components/liveDataIndicator/LiveDataIndicator";
 
 export default function DashboardPage() {
   const { data: events, isLoading, error, isLive, lastUpdated, refreshData } = useDashboardEvents();
@@ -55,23 +56,9 @@ export default function DashboardPage() {
   const eventStats = calculateEventStats(filteredEvents ?? []);
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen p-14">
+    <div className="flex flex-col items-center justify-center w-screen p-7 md:p-14 ">
       <MaxWidthWrapper>
-        {/* Live Data Indicator */}
-        <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${isLive ? "bg-green-500 animate-pulse" : "bg-gray-400"}`}></div>
-            <span className="text-sm text-gray-600">
-              {isLive ? "Updating..." : `Last updated: ${new Date(lastUpdated).toLocaleTimeString()}`}
-            </span>
-          </div>
-          <button
-            onClick={refreshData}
-            disabled={isLive}
-            className="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50">
-            {isLive ? "Updating..." : "Refresh"}
-          </button>
-        </div>
+        <LiveDataIndicator isLive={isLive} lastUpdated={lastUpdated} refreshData={refreshData} />
 
         {/* Stats Grid */}
         {eventStats && (

@@ -58,7 +58,9 @@ function getRateLimitStatus(ip: string) {
   record.count++;
   rateLimitStore.set(key, record);
 
-  if (Math.random() < 0.1) {
+  const periodicCleanup = Math.random() < 0.1;
+
+  if (periodicCleanup) {
     cleanupExpiredEntries(now);
   }
 

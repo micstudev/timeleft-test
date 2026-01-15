@@ -41,35 +41,33 @@ interface TableHeaderComponentProps {
   handleSort: (field: SortableField) => void;
 }
 
-export function TableHeaderWithSort({ sortConfig, handleSort }: TableHeaderComponentProps) {
+export const TableHeaderWithSort = ({ sortConfig, handleSort }: TableHeaderComponentProps) => {
+  const headerColumns = [
+    { field: "type" as SortableField, label: "Event", sortable: true },
+    { field: "country" as SortableField, label: "Country", sortable: true },
+    { field: "city" as SortableField, label: "City", sortable: true },
+    { field: "date" as SortableField, label: "Date", sortable: true },
+    { field: "capacity" as SortableField, label: "Capacity", sortable: true },
+    { field: "status" as SortableField, label: "Status", sortable: true },
+    { field: null, label: "Type", sortable: false },
+    { field: "booked" as SortableField, label: "Booked", sortable: true }
+  ];
+
   return (
     <TableHeader>
       <TableRow>
-        <TableHead className="text-md">
-          <SortButton field="type" label="Event" handleSort={handleSort} sortConfig={sortConfig} />
-        </TableHead>
-        <TableHead className="text-md">
-          <SortButton field="country" label="Country" handleSort={handleSort} sortConfig={sortConfig} />
-        </TableHead>
-        <TableHead className="text-md">
-          <SortButton field="city" label="City" handleSort={handleSort} sortConfig={sortConfig} />
-        </TableHead>
-        <TableHead className="text-md">
-          <SortButton field="date" label="Date" handleSort={handleSort} sortConfig={sortConfig} />
-        </TableHead>
-        <TableHead className="text-md">
-          <SortButton field="capacity" label="Capacity" handleSort={handleSort} sortConfig={sortConfig} />
-        </TableHead>
-        <TableHead className="text-md">
-          <SortButton field="status" label="Status" handleSort={handleSort} sortConfig={sortConfig} />
-        </TableHead>
-        <TableHead className="text-md">Type</TableHead>
-        <TableHead className="text-md">
-          <SortButton field="booked" label="Booked" handleSort={handleSort} sortConfig={sortConfig} />
-        </TableHead>
+        {headerColumns.map((column, index) => (
+          <TableHead key={index} className="text-md">
+            {column.sortable && column.field ? (
+              <SortButton field={column.field} label={column.label} handleSort={handleSort} sortConfig={sortConfig} />
+            ) : (
+              column.label
+            )}
+          </TableHead>
+        ))}
       </TableRow>
     </TableHeader>
   );
-}
+};
 
 export type { SortConfig, SortableField, SortDirection };

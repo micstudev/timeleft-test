@@ -29,7 +29,7 @@ export function StatsBox({ title, children, className = "", size = "lg" }: Stats
   return (
     <div className={`bg-white border border-gray-200 rounded-lg shadow-sm ${variant.container} ${className}`}>
       <p className={`text-gray-600 uppercase tracking-wide ${variant.title}`}>{title}</p>
-      <p className={`text-gray-900 ${variant.content}`}>{children}</p>
+      <p className={`text-gray-900 capitalize ${variant.content}`}>{children}</p>
     </div>
   );
 }

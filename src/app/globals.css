@@ -44,6 +44,12 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Custom breakpoints */
+  --breakpoint-xxl: 1440px;
+
+  /* Custom max-width values */
+  --max-width-app: 1440px;
 }
 
 :root {
