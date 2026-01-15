@@ -1,11 +1,12 @@
 import { Event } from "@/types/events";
 import { getEvents } from "./getEvents";
 
-global.fetch = jest.fn();
+const mockFetch = jest.fn();
+global.fetch = mockFetch;
 
 describe("getEvents", () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    mockFetch.mockClear();
   });
 
   it("should fetch and return events successfully", async () => {
@@ -32,19 +33,19 @@ describe("getEvents", () => {
       }
     ];
 
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
+    mockFetch.mockResolvedValueOnce({
       ok: true,
       json: async () => mockEvents
     });
 
     const result = await getEvents();
 
-    expect(global.fetch).toHaveBeenCalledWith("http://localhost:3000/api/events");
+    expect(mockFetch).toHaveBeenCalledWith("http://localhost:3000/api/events");
     expect(result).toEqual(mockEvents);
   });
 
   it("should throw error when response is not ok", async () => {
-    (global.fetch as jest.Mock).mockResolvedValueOnce({
+    mockFetch.mockResolvedValueOnce({
       ok: false,
       statusText: "Internal Server Error"
     });
@@ -53,7 +54,7 @@ describe("getEvents", () => {
   });
 
   it("should throw error when fetch fails", async () => {
-    (global.fetch as jest.Mock).mockRejectedValueOnce(new Error("Network error"));
+    mockFetch.mockRejectedValueOnce(new Error("Network error"));
 
     await expect(getEvents()).rejects.toThrow("Network error");
   });

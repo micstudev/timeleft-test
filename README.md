@@ -14,6 +14,8 @@ pnpm dev
 bun dev
 ```
 
+TO RUN TESTS: "npm test" whilst server is running (bun was not laying nicely with jest)
+
 What I built and Why?
 
 - Opted for fully client-side implementation, leveraging TanStack Query for client-side caching, refetching for live updates and handling loading and error states easily. Reason behind this is the back-office dashboard needs functionality of live data feed to be effective for end user. Rather than say fetch in server component and pass to client component as this pattern is generally better for first page load and SEO but these don't really matter as much to us.
