@@ -42,7 +42,6 @@ describe("EventFilters", () => {
         city: { id: 2, name: "Paris", country: { id: 2, name: "France" } }
       }
     },
-    // Duplicate values to confirm de-duplication
     {
       id: "3",
       type: "Concert",
@@ -86,15 +85,12 @@ describe("EventFilters", () => {
       const countrySelect = screen.getByLabelText("Country");
       const statusSelect = screen.getByLabelText("Status");
 
-      // Event Type options
       expect(within(typeSelect).getByRole("option", { name: "Concert" })).toBeInTheDocument();
       expect(within(typeSelect).getByRole("option", { name: "Theater" })).toBeInTheDocument();
 
-      // Country options
       expect(within(countrySelect).getByRole("option", { name: "UK" })).toBeInTheDocument();
       expect(within(countrySelect).getByRole("option", { name: "France" })).toBeInTheDocument();
 
-      // Status options
       expect(within(statusSelect).getByRole("option", { name: "upcoming" })).toBeInTheDocument();
       expect(within(statusSelect).getByRole("option", { name: "live" })).toBeInTheDocument();
     });
@@ -149,7 +145,6 @@ describe("EventFilters", () => {
       render(<EventFilters events={mockEvents} />);
 
       const typeSelect = screen.getByLabelText("Event Type");
-      // Assuming the placeholder renders an empty string value option
       await user.selectOptions(typeSelect, "");
 
       expect(mockUpdateParam).toHaveBeenCalledWith("type", null);
