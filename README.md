@@ -52,3 +52,4 @@ If this was being built for real world what would I do different?
 - Would add a layer of authentication too the api route - e.g. requests to it needing an API key or maybe only allowing requests from said application pages e.g. from within the site at /events or whatever
 - Would implement nicer looking error and loading state for the user - that fits within design system
 - Would probably extend unit test coverage to every util function and more components
+- Would of course stick API url and base URL for site into envs and anything else, so when live envs are kept safe serverside and not baked into code etc....
